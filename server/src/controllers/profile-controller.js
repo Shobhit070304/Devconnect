@@ -11,18 +11,22 @@ module.exports.createOrUpdateProfile = async (req, res) => {
     }
 
     // Get the profile data from the request body
-    const { bio, skills, github, linkedin, website, leetcode } = req.body;
+    const { bio, about, skills, github, linkedin, website, leetcode, location, role, avatar } = req.body;
 
     const userId = req.user.id; // Assuming user ID is stored in req.user
 
     const profileData = {
       user: userId,
       bio,
-      skills: skills.split(" ").map((skill) => skill.trim()),
+      about,
+      skills: skills.split(",").map((skill) => skill.trim()),
       github,
       linkedin,
       website,
       leetcode,
+      location,
+      role,
+      avatar,
     };
 
     // Check if the profile already exists for the user
@@ -85,6 +89,10 @@ module.exports.getAllProfiles = async (req, res) => {
 // Get profile by ID
 module.exports.getProfileById = async (req, res) => {
   try {
+    if (!req.params.id) {
+      return res.status(400).json({ message: "Profile ID is required" });
+    }
+
     const profile = await Profile.findOne({ user: req.params.id }).populate(
       "user",
       ["username", "email"]
@@ -92,7 +100,7 @@ module.exports.getProfileById = async (req, res) => {
     if (!profile) {
       return res.status(404).json({ message: "Profile not found" });
     }
-    return res.status(200).json(profile);
+    return res.status(200).json({ profile });
   } catch (error) {
     console.error("Error fetching profile by ID:", error);
     return res.status(500).json({ message: error.message });

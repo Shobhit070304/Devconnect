@@ -1,1 +1,94 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased scroll-smooth;
+  }
+  
+  body {
+    @apply bg-background-light text-foreground-light transition-colors duration-200 
+           dark:bg-background-dark dark:text-foreground-dark;
+  }
+  
+  h1 {
+    @apply text-3xl font-bold md:text-4xl;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    @apply text-2xl font-bold md:text-3xl;
+    line-height: 1.2;
+  }
+  
+  h3 {
+    @apply text-xl font-semibold md:text-2xl;
+    line-height: 1.2;
+  }
+  
+  h4 {
+    @apply text-lg font-semibold md:text-xl;
+    line-height: 1.2;
+  }
+  
+  p, li {
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-lg bg-white p-6 shadow-card-light 
+           transition-all duration-200 hover:shadow-elevated-light 
+           dark:bg-gray-800 dark:shadow-card-dark dark:hover:shadow-elevated-dark;
+  }
+
+  .input {
+    @apply rounded-md border border-gray-300 bg-white px-4 py-2
+           transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 
+           focus:ring-primary-500/20 dark:border-gray-700 dark:bg-gray-900 
+           dark:focus:border-primary-400 dark:focus:ring-primary-400/20;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md px-4 py-2 
+           font-medium transition-colors focus:outline-none focus:ring-2 
+           focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 
+           focus:ring-primary-500 dark:bg-primary-700 dark:hover:bg-primary-600;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary-600 text-white hover:bg-secondary-700 
+           focus:ring-secondary-500 dark:bg-secondary-700 dark:hover:bg-secondary-600;
+  }
+
+  .btn-outline {
+    @apply btn border border-gray-300 bg-transparent hover:bg-gray-50 
+           focus:ring-gray-500 dark:border-gray-600 dark:hover:bg-gray-800;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300;
+  }
+
+  .badge-secondary {
+    @apply badge bg-secondary-100 text-secondary-800 dark:bg-secondary-900 dark:text-secondary-300;
+  }
+
+  .badge-accent {
+    @apply badge bg-accent-100 text-accent-800 dark:bg-accent-900 dark:text-accent-300;
+  }
+
+  .link {
+    @apply text-primary-600 hover:underline dark:text-primary-400;
+  }
+}

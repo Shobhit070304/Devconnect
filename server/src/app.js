@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 // Import routes
 const userRoutes = require("./routes/user-routes");
 const profileRoutes = require("./routes/profile-routes");
+const postRoutes = require("./routes/post-routes");
 
 // Connect to MongoDB
 connectDB();
@@ -27,7 +28,9 @@ app.use(cookieParser());
 app.get("/api", (req, res) => {
   res.send("Hello World");
 });
-app.use("/api/user", userRoutes);
+app.use("/api/auth", userRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/post", postRoutes);
+
 
 module.exports = app;

@@ -39,7 +39,7 @@ module.exports.registerUser = async (req, res) => {
     res.cookie("token", token);
 
     //Send the response
-    res.status(201).json({
+    res.status(200).json({
       token: token,
       message: "User registered successfully",
     });
@@ -84,9 +84,13 @@ module.exports.loginUser = async (req, res) => {
     //Set the JWT token in a cookie
     res.cookie("token", token);
 
+    //Remove the password from the user object
+    isUserExist.password = undefined;
+
     //Send the response
     res.status(200).json({
       token: token,
+      user: isUserExist,
       message: "User logged in successfully",
     });
   } catch (error) {

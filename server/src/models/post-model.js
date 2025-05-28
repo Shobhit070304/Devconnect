@@ -1,41 +1,40 @@
 const mongoose = require("mongoose");
 
-const profileSchema = new mongoose.Schema(
+const postSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      unique: true,
     },
-    bio: {
+    name: {
       type: String,
       required: true,
     },
-    about: {
+    content: {
+      type: String,
+      required: true,
+      maxlength: 500,
+    },
+    tech: {
       type: String,
       required: true,
     },
-    skills: {
-      type: [String],
-      required: true,
-    },
-    website: String,
-    github: String,
-    linkedin: String,
-    leetcode: String,
-    portfolio: String,
-    location: {
+    link: {
       type: String,
       required: true,
     },
-    role: {
-      type: String,
-      required: true,
+    isOpen: {
+      type: Boolean,
+      default: true,
     },
-    avatar: String,
+    images: [String],
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Profile", profileSchema);
+module.exports = mongoose.model("Post", postSchema);
